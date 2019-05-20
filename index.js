@@ -2,7 +2,7 @@ var memeClient = require('./meme-eco-wrap')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-var token = "NTc5ODIzOTA3NjI0NzE0MjQw.XOHxIw.urU8e-aqILTajGB93kx3u1paHOg";
+var token = "***********";
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
