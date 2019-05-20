@@ -2,8 +2,8 @@ var memeClient = require('./meme-eco-wrap')
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-var token = "************************";
-var prefix = "$";
+var token = process.env.TOKEN
+var prefix = process.env.PREFIX
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
