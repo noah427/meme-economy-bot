@@ -25,6 +25,19 @@ module.exports = {
             var json = JSON.parse(body);
             cb(json)
         });
+    },
+    getInvestments: function (username, cb) {
+        var options = {
+            url: `https://meme.market/api/investor/${username}/investments?`,
+            headers: {
+                'referer': `https://meme.market/user.html?account=${username}`
+            }
+        }
+        request(options, function (err, res, body) {
+            var json = JSON.parse(body);
+            cb(json)
+        });
     }
 }
+
 
