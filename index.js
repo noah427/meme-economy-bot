@@ -7,7 +7,7 @@ var prefix = process.env.PREFIX;
 var token = process.env.TOKEN;
 var useKeepAlive = process.env.USEKEEPALIVE;
 
-if (useKeepAlive == "true") {
+if (useKeepAlive === "true") {
   keepAlive.run()
 }
 
@@ -36,7 +36,7 @@ client.on('message', msg => {
     Execs: ${firm.execs}
     Members: ${firm.size}
     Tax: ${firm.tax}%
-    Last payout: ${firm.last_payout}
+    Last payout: ${memeClient.unixToDate(firm.last_payout)}
     `+ "```"));
   }
   if (msg.content.startsWith(`${prefix}getinvestments`)) {
@@ -58,7 +58,7 @@ client.on('message', msg => {
         Comment: ${element.comment}
         Post: ${element.post}
         Response: ${element.response}
-        Time: ${element.time}
+        Time: ${memeClient.unixToDate(element.time)}
         `
           msg.channel.send("```js\n" + investmentData + "```")
         }
