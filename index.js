@@ -7,7 +7,7 @@ var prefix = process.env.PREFIX;
 var token = process.env.TOKEN;
 var useKeepAlive = process.env.USEKEEPALIVE;
 
-if (useKeepAlive == true) {
+if (useKeepAlive == "true") {
   keepAlive.run()
 }
 
