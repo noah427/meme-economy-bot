@@ -1,9 +1,16 @@
 var memeClient = require('./meme-eco-wrap')
 const Discord = require('discord.js');
 const client = new Discord.Client();
+var keepAlive = require('./keepalive');
 
-var token = process.env.TOKEN
-var prefix = process.env.PREFIX
+var prefix = process.env.PREFIX;
+var token = process.env.TOKEN;
+var useKeepAlive = process.env.USEKEEPALIVE;
+
+if (useKeepAlive == true) {
+  keepAlive.run()
+}
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -11,16 +18,17 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if(msg.content.startsWith(`${prefix}help`)){
-    msg.channel.send("```json"+`
+  if (msg.content.startsWith(`${prefix}help`)) {
+    msg.channel.send("```json" + `
     ${prefix}help: shows this message
     ${prefix}getfirm: gets firm stats by id
     ${prefix}getuser: gets user stats by username
     ${prefix}getinvestments: gets a users last three investments by username
-    `+"```")
+    `+ "```")
   }
   if (msg.content.startsWith(`${prefix}getfirm`)) {
     var args = msg.toString().split(" ")
+
     memeClient.getFirm(args[1], firm => msg.channel.send("```js\n" + `
     name: ${firm.name}
     firm balance: ${firm.balance}
@@ -30,7 +38,6 @@ client.on('message', msg => {
     Tax: ${firm.tax}%
     Last payout: ${firm.last_payout}
     `+ "```"));
-
   }
   if (msg.content.startsWith(`${prefix}getinvestments`)) {
     var args = msg.toString().split(" ")
@@ -38,8 +45,8 @@ client.on('message', msg => {
       var countdown = 3
       investments.forEach(element => {
         countdown--
-        if(countdown >= 0){
-        var investmentData = `
+        if (countdown >= 0) {
+          var investmentData = `
         Investment: 
         Completed: ${element.done}
         Amount: ${element.amount}
@@ -53,7 +60,7 @@ client.on('message', msg => {
         Response: ${element.response}
         Time: ${element.time}
         `
-        msg.channel.send("```js\n"+investmentData+"```")
+          msg.channel.send("```js\n" + investmentData + "```")
         }
       });
     })
